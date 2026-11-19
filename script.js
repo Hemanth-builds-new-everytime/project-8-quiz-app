@@ -193,24 +193,29 @@ function nextQuestion() {
 
   currentQuestionIndex++;
 
-  if (currentQuestionIndex <= questions.length) {
+  if (currentQuestionIndex < questions.length) {
     showQuestion();
   } else {
     showResult();
-  } 
+  }
 }
 
 
 // show result function 
-function showResult () {
+function showResult() {
   quizScreen.classList.add("hidden");
   resultScreen.classList.remove("hidden");
-  finalScore.textContent  = `${score} / ${questions.length}`;
+  finalScore.textContent = `${score} / ${questions.length}`;
 
 }
 
 
+
+// next btn event listener
 nextButton.addEventListener('click', nextQuestion);
+
+// restart button event listener
+restartButton.addEventListener('click', startQuiz);
 
 startQuiz();
 

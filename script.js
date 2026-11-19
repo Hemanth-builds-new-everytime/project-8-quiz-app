@@ -113,18 +113,18 @@ const showQuestion = () => {
 
   options.innerHTML = "";
 
-  currentQuestion.options.forEach(option => { 
-    const button = document.createElement("button"); 
+  currentQuestion.options.forEach(option => {
+    const button = document.createElement("button");
 
     button.className = "w-full rounded-lg border border-slate-700 bg-slate-900 p-4 text-left transition hover:bg-slate-700"
 
     button.textContent = option;
 
     button.addEventListener("click", () => {
-      checkAnswer(option, button); 
-    }) 
+      checkAnswer(option, button);
+    })
 
-    options.append(button);  
+    options.append(button);
 
   });
 
@@ -182,6 +182,19 @@ function checkAnswer(selectedAnswer, selectedButton) {
   nextButton.disabled = false;
 
 }
+
+function nextQuestion() {
+
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex <= questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  } 
+}
+
+nextButton.addEventListener('click', nextQuestion);
 
 startQuiz();
 

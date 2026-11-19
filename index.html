@@ -1,86 +1,86 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="./src/output.css" />
-  </head>
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Quiz App</title>
+      <link rel="stylesheet" href="./src/output.css" />
+    </head>
 
-  <body
-    class="min-h-screen bg-slate-950 text-white flex items-center justify-center p-4"
-  >
-    <main
-      id="quiz-container"
-      class="w-full max-w-2xl bg-slate-800 rounded-2xl border border-slate-700 p-6"
+    <body
+      class="min-h-screen bg-slate-950 text-white flex items-center justify-center p-4"
     >
+      <main
+        id="quiz-container"
+        class="w-full max-w-2xl bg-slate-800 rounded-2xl border border-slate-700 p-6"
+      >
+        <!-- quiz  screen  -->
 
-    <!-- quiz  screen  -->
+        <section id="quiz-screen">
+          <h1 class="mb-6 text-center text-3xl font-bold">Quiz App</h1>
 
-    <section id="quiz-screen">
+          <div class="mb-4 flex items-center justify-between text-slate-300">
+            <p id="question-number">Question 1 / 10</p>
+            <p id="score">Score: 0</p>
+          </div>
 
-      <h1 class="mb-6 text-center text-3xl font-bold">Quiz App</h1>
+          <!-- progress bar  -->
 
-      <div class="mb-4 flex items-center justify-between text-slate-300">
-        <p id="question-number">Question 1 / 10</p>
-        <p id="score">Score: 0</p>
-      </div>
+          <div class="mb-8 h-2 w-full overflow-hidden rounded-full bg-slate-700">
+            <div
+              id="progress-bar"
+              class="h-full w-[10%] rounded-full bg-indigo-500"
+            ></div>
+          </div>
 
-      <!-- progress bar  -->
+          <!-- question display section -->
 
-      <div class="mb-8 h-2 w-full overflow-hidden rounded-full bg-slate-700">
-        <div
-          id="progress-bar"
-          class="h-full w-[10%] rounded-full bg-indigo-500"
-        ></div>
-      </div>
+          <section
+            class="mb-6 rounded-xl border border-slate-700 bg-slate-900 p-5"
+          >
+            <h2 id="question" class="text-xl font-semibold leading-relaxed">
+              What is the capital of India?
+            </h2>
+          </section>
 
-      <!-- question display section -->
+          <!-- Options Area -->
+          <div id="options" class="grid gap-3"></div>
 
-      <section class="mb-6 rounded-xl border border-slate-700 bg-slate-900 p-5">
-        <h2 id="question" class="text-xl font-semibold leading-relaxed">
-          What is the capital of India? 
-        </h2>
-      </section>
+          <!-- Feedback -->
+          <p id="feedback" class="mt-4 text-center font-medium"></p>
 
-      <!-- optioons area -->
-      <div id="options" class="grid gap-3">
-        <p id="feedback" class="mt-4 text-center font-medium"></p>
-
-        <button id="next-button" type="button disabled" class="mt-6 w-full rounded-lg bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disbaled:opacity-50">Next Question</button>
-
-      </div>
-
-      </section>
+          <!-- Next Button -->
+          <button
+            id="next-button"
+            type="button"
+            disabled
+            class="mt-6 w-full rounded-lg bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Next Question
+          </button>
+        </section>
 
         <!-- RESULT SCREEN START -->
-  <section id="result-screen" class="hidden text-center">
+        <section id="result-screen" class="hidden text-center">
+          <h2 class="mb-4 text-2xl font-bold">Quiz Completed! 🎉</h2>
 
-    <h2 class="mb-4 text-2xl font-bold">
-      Quiz Completed! 🎉
-    </h2>
+          <p class="mb-2 text-slate-300">Your Final Score</p>
 
-    <p class="mb-2 text-slate-300">
-      Your Final Score
-    </p>
+          <p id="final-score" class="text-4xl font-bold text-indigo-400">
+            0 / 10
+          </p>
 
-    <p id="final-score" class="text-4xl font-bold text-indigo-400">
-      0 / 10
-    </p>
+          <button
+            id="restart-button"
+            type="button"
+            class="mt-8 w-full rounded-lg bg-emerald-600 px-5 py-3 font-semibold text-white transition hover:bg-emerald-500"
+          >
+            Restart Quiz
+          </button>
+        </section>
+        <!-- RESULT SCREEN END -->
+      </main>
 
-    <button
-      id="restart-button"
-      type="button"
-      class="mt-8 w-full rounded-lg bg-emerald-600 px-5 py-3 font-semibold text-white transition hover:bg-emerald-500"
-    >
-      Restart Quiz
-    </button>
-
-  </section>
-  <!-- RESULT SCREEN END -->
-
-    </main>
-
-    <script src="./script.js"></script>
-  </body>
-</html>
+      <script src="./script.js"></script>
+    </body>
+  </html>

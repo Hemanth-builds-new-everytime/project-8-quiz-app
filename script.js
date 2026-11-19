@@ -103,7 +103,7 @@ const showQuestion = () => {
   question.textContent = currentQuestion.question;
   questionNumber.textContent = `Question ${currentQuestionIndex + 1} / ${questions.length}`
 
-  // reset previous questions state  
+  // reset previous questions state   
   hasAnswered = false;
   feedback.textContent = "";
   nextButton.disabled = true;
@@ -113,19 +113,18 @@ const showQuestion = () => {
 
   options.innerHTML = "";
 
-  currentQuestion.options.forEach(option => {
-    const button = document.createElement("button");
+  currentQuestion.options.forEach(option => { 
+    const button = document.createElement("button"); 
 
     button.className = "w-full rounded-lg border border-slate-700 bg-slate-900 p-4 text-left transition hover:bg-slate-700"
 
     button.textContent = option;
 
     button.addEventListener("click", () => {
-      checkAnswer(option, button);
-    })
+      checkAnswer(option, button); 
+    }) 
 
-
-    options.append(button);
+    options.append(button);  
 
   });
 
@@ -133,27 +132,56 @@ const showQuestion = () => {
 
 }
 
-function checkAnswer (selectedAnswer, selectedButton) {
+function checkAnswer(selectedAnswer, selectedButton) {
 
-  // checking if user has answered it already or not
   if (hasAnswered) {
     return;
   }
 
   hasAnswered = true;
 
-  // answer matching
-  if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
+  const correctAnswer = questions[currentQuestionIndex].correctAnswer;
+
+  // Disable all buttons and remove hover effect
+  options.querySelectorAll("button").forEach(button => {
+
+    button.disabled = true;
+
+    // Remove default styling
+    button.classList.remove(
+      "border-slate-700",
+      "bg-slate-900",
+      "hover:bg-slate-700"
+    );
+
+    // Highlight correct answer in green
+    if (button.textContent.trim() === correctAnswer) {
+      button.classList.add(
+        "border-green-500",
+        "bg-green-500/20"
+      );
+    }
+
+  });
+
+  // Check selected answer
+  if (selectedAnswer === correctAnswer) {
+
     score++;
-    scoreDisplay.textContent = `Score ${score}`;
+    scoreDisplay.textContent = `Score: ${score}`;
     feedback.textContent = "Correct Answer!";
 
   } else {
+    feedback.textContent = "Incorrect Answer!";
 
+    // Highlight selected wrong answer in red
+    selectedButton.classList.add("border-red-500", "bg-red-500/20");
   }
+
+  // Enable next question button
+  nextButton.disabled = false;
+
 }
-
-
 
 startQuiz();
 

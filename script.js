@@ -85,6 +85,7 @@ let score = 0;
 let hasAnswered = false;
 
 
+// start quiz function 
 function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
@@ -97,6 +98,7 @@ function startQuiz() {
 }
 
 
+// show question function
 const showQuestion = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -131,6 +133,9 @@ const showQuestion = () => {
 
 
 }
+
+
+// answer checking code part
 
 function checkAnswer(selectedAnswer, selectedButton) {
 
@@ -183,6 +188,7 @@ function checkAnswer(selectedAnswer, selectedButton) {
 
 }
 
+// next question function
 function nextQuestion() {
 
   currentQuestionIndex++;
@@ -193,6 +199,16 @@ function nextQuestion() {
     showResult();
   } 
 }
+
+
+// show result function 
+function showResult () {
+  quizScreen.classList.add("hidden");
+  resultScreen.classList.remove("hidden");
+  finalScore.textContent  = `${score} / ${questions.length}`;
+
+}
+
 
 nextButton.addEventListener('click', nextQuestion);
 

@@ -77,7 +77,8 @@ const feedback = document.querySelector("#feedback");
 const nextButton = document.querySelector("#next-button");
 const finalScore = document.querySelector("#final-score");
 const restartButton = document.querySelector("#restart-button");
-
+const startScreen = document.querySelector("#start-screen");
+const startButton = document.querySelector("#start-button");
 
 
 let currentQuestionIndex = 0;
@@ -91,10 +92,12 @@ function startQuiz() {
   score = 0;
   hasAnswered = false;
 
+  startScreen.classList.add("hidden");
   quizScreen.classList.remove("hidden");
   resultScreen.classList.add("hidden");
   scoreDisplay.textContent = `Score: ${score}`;
   showQuestion();
+
 }
 
 
@@ -217,7 +220,5 @@ nextButton.addEventListener('click', nextQuestion);
 // restart button event listener
 restartButton.addEventListener('click', startQuiz);
 
-startQuiz();
-
-
+startButton.addEventListener('click', startQuiz);
 

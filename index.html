@@ -1,86 +1,169 @@
-  <!doctype html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Quiz App</title>
-      <link rel="stylesheet" href="./src/output.css" />
-    </head>
 
-    <body
-      class="min-h-screen bg-slate-950 text-white flex items-center justify-center p-4"
-    >
-      <main
-        id="quiz-container"
-        class="w-full max-w-2xl bg-slate-800 rounded-2xl border border-slate-700 p-6"
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Quiz App</title>
+
+  <link rel="stylesheet" href="./src/output.css" />
+</head>
+
+<body class="flex min-h-screen items-center justify-center bg-slate-950 p-4 text-white">
+
+  <main
+    id="quiz-container"
+    class="w-full max-w-2xl rounded-2xl border border-slate-700 bg-slate-800 p-6"
+  >
+
+    <!-- START SCREEN -->
+
+    <section id="start-screen" class="text-center">
+
+      <div class="mb-6 text-5xl">
+        🎯
+      </div>
+
+      <h1 class="mb-4 text-3xl font-bold">
+        Welcome to Quiz App!
+      </h1>
+
+      <p class="mb-6 text-slate-300">
+        Test your knowledge and challenge yourself.
+      </p>
+
+      <p class="mb-8 text-sm text-slate-400">
+        Multiple Choice Quiz
+      </p>
+
+      <button
+        id="start-button"
+        type="button"
+        class="w-full rounded-lg bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-500"
       >
-        <!-- quiz  screen  -->
+        Start Quiz
+      </button>
 
-        <section id="quiz-screen">
-          <h1 class="mb-6 text-center text-3xl font-bold">Quiz App</h1>
+    </section>
 
-          <div class="mb-4 flex items-center justify-between text-slate-300">
-            <p id="question-number">Question 1 / 10</p>
-            <p id="score">Score: 0</p>
-          </div>
 
-          <!-- progress bar  -->
+    <!-- QUIZ SCREEN -->
 
-          <div class="mb-8 h-2 w-full overflow-hidden rounded-full bg-slate-700">
-            <div
-              id="progress-bar"
-              class="h-full w-[10%] rounded-full bg-indigo-500"
-            ></div>
-          </div>
+    <section id="quiz-screen" class="hidden">
 
-          <!-- question display section -->
+      <h1 class="mb-6 text-center text-3xl font-bold">
+        Quiz App
+      </h1>
 
-          <section
-            class="mb-6 rounded-xl border border-slate-700 bg-slate-900 p-5"
-          >
-            <h2 id="question" class="text-xl font-semibold leading-relaxed">
-              What is the capital of India?
-            </h2>
-          </section>
+      <!-- Question Number and Score -->
 
-          <!-- Options Area -->
-          <div id="options" class="grid gap-3"></div>
+      <div class="mb-4 flex items-center justify-between text-slate-300">
 
-          <!-- Feedback -->
-          <p id="feedback" class="mt-4 text-center font-medium"></p>
+        <p id="question-number">
+          Question 1 / 10
+        </p>
 
-          <!-- Next Button -->
-          <button
-            id="next-button"
-            type="button"
-            disabled
-            class="mt-6 w-full rounded-lg bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Next Question
-          </button>
-        </section>
+        <p id="score">
+          Score: 0
+        </p>
 
-        <!-- RESULT SCREEN START -->
-        <section id="result-screen" class="hidden text-center">
-          <h2 class="mb-4 text-2xl font-bold">Quiz Completed! 🎉</h2>
+      </div>
 
-          <p class="mb-2 text-slate-300">Your Final Score</p>
 
-          <p id="final-score" class="text-4xl font-bold text-indigo-400">
-            0 / 10
-          </p>
+      <!-- Progress Bar -->
 
-          <button
-            id="restart-button"
-            type="button"
-            class="mt-8 w-full rounded-lg bg-emerald-600 px-5 py-3 font-semibold text-white transition hover:bg-emerald-500"
-          >
-            Restart Quiz
-          </button>
-        </section>
-        <!-- RESULT SCREEN END -->
-      </main>
+      <div class="mb-8 h-2 w-full overflow-hidden rounded-full bg-slate-700">
 
-      <script src="./script.js"></script>
-    </body>
-  </html>
+        <div
+          id="progress-bar"
+          class="h-full w-[10%] rounded-full bg-indigo-500"
+        ></div>
+
+      </div>
+
+
+      <!-- Question Display -->
+
+      <section class="mb-6 rounded-xl border border-slate-700 bg-slate-900 p-5">
+
+        <h2 id="question" class="text-xl font-semibold leading-relaxed">
+          What is the capital of India?
+        </h2>
+
+      </section>
+
+
+      <!-- Options Area -->
+
+      <div id="options" class="grid gap-3">
+
+      </div>
+
+
+      <!-- Feedback -->
+
+      <p id="feedback" class="mt-4 text-center font-medium"></p>
+
+
+      <!-- Next Question Button -->
+
+      <button
+        id="next-button"
+        type="button"
+        disabled
+        class="mt-6 w-full rounded-lg bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        Next Question
+      </button>
+
+    </section>
+
+
+    <!-- RESULT SCREEN -->
+
+    <section id="result-screen" class="hidden text-center">
+
+      <div class="mb-4 text-5xl">
+        🏆
+      </div>
+
+      <h2 class="mb-4 text-2xl font-bold">
+        Quiz Completed!
+      </h2>
+
+      <p class="mb-2 text-slate-300">
+        Your Final Score
+      </p>
+
+      <p
+        id="final-score"
+        class="text-4xl font-bold text-indigo-400"
+      >
+        0 / 10
+      </p>
+
+      <p class="mt-4 text-slate-400">
+        Great job! Thanks for playing.
+      </p>
+
+      <button
+        id="restart-button"
+        type="button"
+        class="mt-8 w-full rounded-lg bg-emerald-600 px-5 py-3 font-semibold text-white transition hover:bg-emerald-500"
+      >
+        Restart Quiz
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <!-- JavaScript -->
+
+  <script src="./script.js"></script>
+
+</body>
+</html>

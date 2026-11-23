@@ -1,169 +1,166 @@
-
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
 
-  <title>Quiz App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="./src/output.css" />
-</head>
+    <link rel="stylesheet" href="./src/output.css" />
+  </head>
 
-<body class="flex min-h-screen items-center justify-center bg-slate-950 p-4 text-white">
-
-  <main
-    id="quiz-container"
-    class="w-full max-w-2xl rounded-2xl border border-slate-700 bg-slate-800 p-6"
+ <body
+  class="flex min-h-screen items-center justify-center bg-[#E9ECF2] px-4 py-8 font-['Bricolage_Grotesque',sans-serif] text-[#1B1E28]"
+>
+  <!-- Background decoration: graph paper + code symbols -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none fixed inset-0 -z-10 select-none overflow-hidden bg-[linear-gradient(#DADFEA_1px,transparent_1px),linear-gradient(90deg,#DADFEA_1px,transparent_1px)] bg-[size:32px_32px]"
   >
+    <span class="absolute left-[4%] top-[6%] hidden -rotate-6 text-[10rem] font-extrabold leading-none text-[#1F3FD1]/15 lg:block">{ }</span>
 
-    <!-- START SCREEN -->
+    <span class="absolute right-[5%] top-[10%] hidden rotate-6 text-[9rem] font-extrabold leading-none text-[#C5CCDD] lg:block">=&gt;</span>
 
-    <section id="start-screen" class="text-center">
+    <span class="absolute bottom-[8%] left-[6%] hidden rotate-3 text-[9rem] font-extrabold leading-none text-[#C5CCDD] lg:block">[ ]</span>
 
-      <div class="mb-6 text-5xl">
-        🎯
-      </div>
-
-      <h1 class="mb-4 text-3xl font-bold">
-        Welcome to Quiz App!
-      </h1>
-
-      <p class="mb-6 text-slate-300">
-        Test your knowledge and challenge yourself.
-      </p>
-
-      <p class="mb-8 text-sm text-slate-400">
-        Multiple Choice Quiz
-      </p>
-
-      <button
-        id="start-button"
-        type="button"
-        class="w-full rounded-lg bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-500"
+    <span class="absolute bottom-[6%] right-[4%] hidden -rotate-3 text-[10rem] font-extrabold leading-none text-[#1F3FD1]/15 lg:block">===</span>
+  </div>
+    <main
+      id="quiz-container"
+      class="w-full max-w-xl rounded-lg border border-[#CBD1E0] bg-white p-5 shadow-[8px_8px_0_#CBD1E0] sm:p-8"
+    >
+      <!-- Header (shared by all screens) -->
+      <header
+        class="mb-8 flex items-end justify-between border-b-4 border-double border-[#1B1E28] pb-3"
       >
-        Start Quiz
-      </button>
+        <div class="flex items-center gap-2.5">
+          <span class="size-4 rounded-full bg-[#1F3FD1]"></span>
+          <span class="text-xl font-extrabold tracking-tight">JS Quiz</span>
+        </div>
+        <span class="text-sm text-[#6B7080]">Answer sheet</span>
+      </header>
 
-    </section>
+      <!-- START SCREEN -->
 
+      <section id="start-screen">
+        <h1
+          class="mb-3 text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl"
+        >
+          Test your JavaScript knowledge.
+        </h1>
 
-    <!-- QUIZ SCREEN -->
-
-    <section id="quiz-screen" class="hidden">
-
-      <h1 class="mb-6 text-center text-3xl font-bold">
-        Quiz App
-      </h1>
-
-      <!-- Question Number and Score -->
-
-      <div class="mb-4 flex items-center justify-between text-slate-300">
-
-        <p id="question-number">
-          Question 1 / 10
+        <p class="mb-8 max-w-md text-lg leading-relaxed text-[#6B7080]">
+          Answer multiple choice questions and see your score at the end.
         </p>
 
-        <p id="score">
-          Score: 0
-        </p>
+        <!-- Quiz details -->
+        <dl class="mb-8 border-t border-[#D9DCE5]">
+          <div class="flex justify-between border-b border-[#D9DCE5] py-3">
+            <dt class="text-[#6B7080]">Questions</dt>
+            <dd class="font-bold">10</dd>
+          </div>
+          <div class="flex justify-between border-b border-[#D9DCE5] py-3">
+            <dt class="text-[#6B7080]">Format</dt>
+            <dd class="font-bold">Multiple choice</dd>
+          </div>
+          <div class="flex justify-between border-b border-[#D9DCE5] py-3">
+            <dt class="text-[#6B7080]">Result</dt>
+            <dd class="font-bold">Instant score</dd>
+          </div>
+        </dl>
 
-      </div>
+        <!-- Start Button -->
+        <button
+          id="start-button"
+          type="button"
+          class="w-full cursor-pointer rounded-xl bg-[#1F3FD1] px-6 py-4 text-lg font-bold text-white transition-colors duration-150 hover:bg-[#1A35B0] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1F3FD1] motion-safe:active:translate-y-px"
+        >
+          Start quiz
+        </button>
+      </section>
 
+      <!-- QUIZ SCREEN -->
 
-      <!-- Progress Bar -->
+      <section id="quiz-screen" class="hidden">
+        <!-- Question Number and Score -->
 
-      <div class="mb-8 h-2 w-full overflow-hidden rounded-full bg-slate-700">
+        <div class="mb-3 flex items-baseline justify-between">
+          <p id="question-number" class="font-bold">Question 1 / 10</p>
 
-        <div
-          id="progress-bar"
-          class="h-full w-[10%] rounded-full bg-indigo-500"
-        ></div>
+          <p id="score" class="text-[#6B7080]">Score: 0</p>
+        </div>
 
-      </div>
+        <!-- Progress Bar -->
 
+        <div class="h-2 w-full overflow-hidden rounded-full bg-[#D9DCE5]">
+          <div
+            id="progress-bar"
+            class="h-full w-[10%] rounded-full bg-[#1F3FD1] transition-[width] duration-300"
+          ></div>
+        </div>
 
-      <!-- Question Display -->
+        <!-- Question Display -->
 
-      <section class="mb-6 rounded-xl border border-slate-700 bg-slate-900 p-5">
-
-        <h2 id="question" class="text-xl font-semibold leading-relaxed">
+        <h2
+          id="question"
+          class="mb-8 mt-8 min-h-[4.5rem] text-2xl font-bold leading-snug sm:text-3xl"
+        >
           What is the capital of India?
         </h2>
 
+        <!-- Options Area -->
+
+        <div id="options" class="grid gap-3"></div>
+
+        <!-- Feedback -->
+
+        <p id="feedback" class="mt-5 min-h-6 font-bold"></p>
+
+        <!-- Next Question Button -->
+
+        <button
+          id="next-button"
+          type="button"
+          disabled
+          class="mt-4 w-full cursor-pointer rounded-xl bg-[#1F3FD1] px-6 py-3.5 font-bold text-white transition-colors duration-150 hover:bg-[#1A35B0] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1F3FD1] disabled:cursor-not-allowed disabled:bg-[#D9DCE5] disabled:text-[#8A90A2]"
+        >
+          Next Question
+        </button>
       </section>
 
+      <!-- RESULT SCREEN -->
 
-      <!-- Options Area -->
+      <section id="result-screen" class="hidden">
+        <p class="mb-1 text-[#6B7080]">Your Final Score</p>
 
-      <div id="options" class="grid gap-3">
+        <p
+          id="final-score"
+          class="mb-4 text-8xl font-extrabold leading-none tracking-tight text-[#1F3FD1]"
+        >
+          0 / 10
+        </p>
 
-      </div>
+        <p class="mb-8 text-xl font-bold">Quiz Completed! Thanks for playing.</p>
 
+        <button
+          id="restart-button"
+          type="button"
+          class="w-full cursor-pointer rounded-xl bg-[#1B1E28] px-6 py-4 text-lg font-bold text-white transition-colors duration-150 hover:bg-[#2E3345] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B1E28] motion-safe:active:translate-y-px"
+        >
+          Restart Quiz
+        </button>
+      </section>
+    </main>
 
-      <!-- Feedback -->
+    <!-- JavaScript -->
 
-      <p id="feedback" class="mt-4 text-center font-medium"></p>
-
-
-      <!-- Next Question Button -->
-
-      <button
-        id="next-button"
-        type="button"
-        disabled
-        class="mt-6 w-full rounded-lg bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        Next Question
-      </button>
-
-    </section>
-
-
-    <!-- RESULT SCREEN -->
-
-    <section id="result-screen" class="hidden text-center">
-
-      <div class="mb-4 text-5xl">
-        🏆
-      </div>
-
-      <h2 class="mb-4 text-2xl font-bold">
-        Quiz Completed!
-      </h2>
-
-      <p class="mb-2 text-slate-300">
-        Your Final Score
-      </p>
-
-      <p
-        id="final-score"
-        class="text-4xl font-bold text-indigo-400"
-      >
-        0 / 10
-      </p>
-
-      <p class="mt-4 text-slate-400">
-        Great job! Thanks for playing.
-      </p>
-
-      <button
-        id="restart-button"
-        type="button"
-        class="mt-8 w-full rounded-lg bg-emerald-600 px-5 py-3 font-semibold text-white transition hover:bg-emerald-500"
-      >
-        Restart Quiz
-      </button>
-
-    </section>
-
-  </main>
-
-
-  <!-- JavaScript -->
-
-  <script src="./script.js"></script>
-
-</body>
+    <script src="./script.js"></script>
+  </body>
 </html>

@@ -1,46 +1,26 @@
 const questions = [
   {
-    question: "What is the capital of India?",
-    options: ["Mumbai", "New Delhi", "Kolkata", "Chennai"],
-    correctAnswer: "New Delhi"
+    question: "Which keyword is used to declare a block-scoped variable that can be reassigned?",
+    options: ["const", "let", "static", "final"],
+    correctAnswer: "let"
   },
   {
-    question: "Which language is used to style web pages?",
-    options: ["HTML", "JavaScript", "CSS", "Python"],
-    correctAnswer: "CSS"
-  },
-  {
-    question: "Which company developed JavaScript?",
-    options: ["Microsoft", "Netscape", "Google", "Apple"],
-    correctAnswer: "Netscape"
-  },
-  {
-    question: "Which keyword declares a constant in JavaScript?",
-    options: ["var", "let", "const", "static"],
-    correctAnswer: "const"
-  },
-  {
-    question: "Which method adds an element at the end of an array?",
-    options: ["pop()", "push()", "shift()", "unshift()"],
-    correctAnswer: "push()"
-  },
-  {
-    question: "What does DOM stand for?",
-    options: [
-      "Document Object Model",
-      "Data Object Management",
-      "Digital Ordinance Model",
-      "Document Oriented Method"
-    ],
-    correctAnswer: "Document Object Model"
-  },
-  {
-    question: "Which symbol is used for strict equality in JavaScript?",
+    question: "Which operator is used for strict equality in JavaScript?",
     options: ["=", "==", "===", "!="],
     correctAnswer: "==="
   },
   {
-    question: "Which method selects an element by its ID?",
+    question: "Which method adds an element to the end of an array?",
+    options: ["pop()", "push()", "shift()", "unshift()"],
+    correctAnswer: "push()"
+  },
+  {
+    question: "Which operator is used to check the data type of a value?",
+    options: ["type()", "typeof", "instance", "datatype"],
+    correctAnswer: "typeof"
+  },
+  {
+    question: "Which method selects an HTML element using its ID?",
     options: [
       "querySelectorAll()",
       "getElementById()",
@@ -50,12 +30,7 @@ const questions = [
     correctAnswer: "getElementById()"
   },
   {
-    question: "Which event occurs when a user clicks an element?",
-    options: ["change", "submit", "click", "load"],
-    correctAnswer: "click"
-  },
-  {
-    question: "Which method converts JSON text into a JavaScript object?",
+    question: "Which method converts a JSON string into a JavaScript object?",
     options: [
       "JSON.stringify()",
       "JSON.parse()",
@@ -63,6 +38,41 @@ const questions = [
       "JSON.object()"
     ],
     correctAnswer: "JSON.parse()"
+  },
+  {
+    question: "Which method is used to attach an event listener to an element?",
+    options: [
+      "addEventListener()",
+      "appendChild()",
+      "createElement()",
+      "querySelector()"
+    ],
+    correctAnswer: "addEventListener()"
+  },
+  {
+    question: "Which syntax represents an arrow function in JavaScript?",
+    options: [
+      "function =>",
+      "() => {}",
+      "function() ->",
+      "=> function()"
+    ],
+    correctAnswer: "() => {}"
+  },
+  {
+    question: "Which array method creates a new array containing elements that pass a condition?",
+    options: ["map()", "forEach()", "filter()", "reduce()"],
+    correctAnswer: "filter()"
+  },
+  {
+    question: "What does an async function always return?",
+    options: [
+      "An Array",
+      "A String",
+      "A Promise",
+      "An Object"
+    ],
+    correctAnswer: "A Promise"
   }
 ];
 
@@ -121,7 +131,8 @@ const showQuestion = () => {
   currentQuestion.options.forEach(option => {
     const button = document.createElement("button");
 
-    button.className = "w-full rounded-lg border border-slate-700 bg-slate-900 p-4 text-left transition hover:bg-slate-700"
+    button.className =
+      "w-full rounded-xl border-2 border-[#D9DCE5] bg-white px-5 py-3.5 text-left font-medium text-[#1B1E28] transition-colors duration-150 hover:border-[#1F3FD1] hover:bg-[#F3F5FF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1F3FD1] disabled:cursor-not-allowed";
 
     button.textContent = option;
 
@@ -157,16 +168,18 @@ function checkAnswer(selectedAnswer, selectedButton) {
 
     // Remove default styling
     button.classList.remove(
-      "border-slate-700",
-      "bg-slate-900",
-      "hover:bg-slate-700"
+      "border-[#D9DCE5]",
+      "bg-white",
+      "text-[#1B1E28]",
+      "hover:border-[#1F3FD1]",
+      "hover:bg-[#F3F5FF]"
     );
-
     // Highlight correct answer in green
     if (button.textContent.trim() === correctAnswer) {
       button.classList.add(
-        "border-green-500",
-        "bg-green-500/20"
+        "border-[#12915A]",
+        "bg-[#E8F6EE]",
+        "text-[#0B5E3A]"
       );
     }
 
@@ -183,7 +196,7 @@ function checkAnswer(selectedAnswer, selectedButton) {
     feedback.textContent = "Incorrect Answer!";
 
     // Highlight selected wrong answer in red
-    selectedButton.classList.add("border-red-500", "bg-red-500/20");
+    selectedButton.classList.add("border-[#D93A2B]", "bg-[#FDEDEB]", "text-[#8F2018]");
   }
 
   // Enable next question button

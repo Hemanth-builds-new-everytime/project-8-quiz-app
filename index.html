@@ -16,22 +16,34 @@
     <link rel="stylesheet" href="./src/output.css" />
   </head>
 
- <body
-  class="flex min-h-screen items-center justify-center bg-[#E9ECF2] px-4 py-8 font-['Bricolage_Grotesque',sans-serif] text-[#1B1E28]"
->
-  <!-- Background decoration: graph paper + code symbols -->
-  <div
-    aria-hidden="true"
-    class="pointer-events-none fixed inset-0 -z-10 select-none overflow-hidden bg-[linear-gradient(#DADFEA_1px,transparent_1px),linear-gradient(90deg,#DADFEA_1px,transparent_1px)] bg-[size:32px_32px]"
+  <body
+    class="flex min-h-screen items-center justify-center bg-[#E9ECF2] px-4 py-8 font-['Bricolage_Grotesque',sans-serif] text-[#1B1E28]"
   >
-    <span class="absolute left-[4%] top-[6%] hidden -rotate-6 text-[10rem] font-extrabold leading-none text-[#1F3FD1]/15 lg:block">{ }</span>
+    <!-- Background decoration: graph paper + code symbols -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none fixed inset-0 -z-10 select-none overflow-hidden bg-[linear-gradient(#DADFEA_1px,transparent_1px),linear-gradient(90deg,#DADFEA_1px,transparent_1px)] bg-[size:32px_32px]"
+    >
+      <span
+        class="absolute left-[4%] top-[6%] hidden -rotate-6 text-[10rem] font-extrabold leading-none text-[#1F3FD1]/15 lg:block"
+        >{ }</span
+      >
 
-    <span class="absolute right-[5%] top-[10%] hidden rotate-6 text-[9rem] font-extrabold leading-none text-[#C5CCDD] lg:block">=&gt;</span>
+      <span
+        class="absolute right-[5%] top-[10%] hidden rotate-6 text-[9rem] font-extrabold leading-none text-[#C5CCDD] lg:block"
+        >=&gt;</span
+      >
 
-    <span class="absolute bottom-[8%] left-[6%] hidden rotate-3 text-[9rem] font-extrabold leading-none text-[#C5CCDD] lg:block">[ ]</span>
+      <span
+        class="absolute bottom-[8%] left-[6%] hidden rotate-3 text-[9rem] font-extrabold leading-none text-[#C5CCDD] lg:block"
+        >[ ]</span
+      >
 
-    <span class="absolute bottom-[6%] right-[4%] hidden -rotate-3 text-[10rem] font-extrabold leading-none text-[#1F3FD1]/15 lg:block">===</span>
-  </div>
+      <span
+        class="absolute bottom-[6%] right-[4%] hidden -rotate-3 text-[10rem] font-extrabold leading-none text-[#1F3FD1]/15 lg:block"
+        >===</span
+      >
+    </div>
     <main
       id="quiz-container"
       class="w-full max-w-xl rounded-lg border border-[#CBD1E0] bg-white p-5 shadow-[8px_8px_0_#CBD1E0] sm:p-8"
@@ -91,8 +103,15 @@
       <section id="quiz-screen" class="hidden">
         <!-- Question Number and Score -->
 
-        <div class="mb-3 flex items-baseline justify-between">
+        <div class="mb-3 flex flex-wrap items-baseline justify-between gap-1">
           <p id="question-number" class="font-bold">Question 1 / 10</p>
+
+          <p
+            id="timer"
+            class="rounded-full bg-[#DCFCE7] px-3 py-1 text-sm font-bold text-[#16A34A] transition-colors duration-300"
+          >
+            Time: 15s
+          </p>
 
           <p id="score" class="text-[#6B7080]">Score: 0</p>
         </div>
@@ -147,7 +166,9 @@
           0 / 10
         </p>
 
-        <p class="mb-8 text-xl font-bold">Quiz Completed! Thanks for playing.</p>
+        <p class="mb-8 text-xl font-bold">
+          Quiz Completed! Thanks for playing.
+        </p>
 
         <button
           id="restart-button"

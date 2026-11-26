@@ -1,23 +1,24 @@
 const questions = [
   {
-    question: "Which keyword is used to declare a block-scoped variable that can be reassigned?",
+    question:
+      "Which keyword is used to declare a block-scoped variable that can be reassigned?",
     options: ["const", "let", "static", "final"],
-    correctAnswer: "let"
+    correctAnswer: "let",
   },
   {
     question: "Which operator is used for strict equality in JavaScript?",
     options: ["=", "==", "===", "!="],
-    correctAnswer: "==="
+    correctAnswer: "===",
   },
   {
     question: "Which method adds an element to the end of an array?",
     options: ["pop()", "push()", "shift()", "unshift()"],
-    correctAnswer: "push()"
+    correctAnswer: "push()",
   },
   {
     question: "Which operator is used to check the data type of a value?",
     options: ["type()", "typeof", "instance", "datatype"],
-    correctAnswer: "typeof"
+    correctAnswer: "typeof",
   },
   {
     question: "Which method selects an HTML element using its ID?",
@@ -25,9 +26,9 @@ const questions = [
       "querySelectorAll()",
       "getElementById()",
       "getElementsByClassName()",
-      "getElementsByTagName()"
+      "getElementsByTagName()",
     ],
-    correctAnswer: "getElementById()"
+    correctAnswer: "getElementById()",
   },
   {
     question: "Which method converts a JSON string into a JavaScript object?",
@@ -35,9 +36,9 @@ const questions = [
       "JSON.stringify()",
       "JSON.parse()",
       "JSON.convert()",
-      "JSON.object()"
+      "JSON.object()",
     ],
-    correctAnswer: "JSON.parse()"
+    correctAnswer: "JSON.parse()",
   },
   {
     question: "Which method is used to attach an event listener to an element?",
@@ -45,35 +46,26 @@ const questions = [
       "addEventListener()",
       "appendChild()",
       "createElement()",
-      "querySelector()"
+      "querySelector()",
     ],
-    correctAnswer: "addEventListener()"
+    correctAnswer: "addEventListener()",
   },
   {
     question: "Which syntax represents an arrow function in JavaScript?",
-    options: [
-      "function =>",
-      "() => {}",
-      "function() ->",
-      "=> function()"
-    ],
-    correctAnswer: "() => {}"
+    options: ["function =>", "() => {}", "function() ->", "=> function()"],
+    correctAnswer: "() => {}",
   },
   {
-    question: "Which array method creates a new array containing elements that pass a condition?",
+    question:
+      "Which array method creates a new array containing elements that pass a condition?",
     options: ["map()", "forEach()", "filter()", "reduce()"],
-    correctAnswer: "filter()"
+    correctAnswer: "filter()",
   },
   {
     question: "What does an async function always return?",
-    options: [
-      "An Array",
-      "A String",
-      "A Promise",
-      "An Object"
-    ],
-    correctAnswer: "A Promise"
-  }
+    options: ["An Array", "A String", "A Promise", "An Object"],
+    correctAnswer: "A Promise",
+  },
 ];
 
 const quizScreen = document.querySelector("#quiz-screen");
@@ -89,14 +81,17 @@ const finalScore = document.querySelector("#final-score");
 const restartButton = document.querySelector("#restart-button");
 const startScreen = document.querySelector("#start-screen");
 const startButton = document.querySelector("#start-button");
-
+const timerDisplay = document.querySelector("#timer");
 
 let currentQuestionIndex = 0;
 let score = 0;
 let hasAnswered = false;
 
+// initial value for timer
+let timeLeft = 15;
+let timeInterval = null;
 
-// start quiz function 
+// start quiz function
 function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
@@ -107,28 +102,27 @@ function startQuiz() {
   resultScreen.classList.add("hidden");
   scoreDisplay.textContent = `Score: ${score}`;
   showQuestion();
-
 }
-
 
 // show question function
 const showQuestion = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   question.textContent = currentQuestion.question;
-  questionNumber.textContent = `Question ${currentQuestionIndex + 1} / ${questions.length}`
+  questionNumber.textContent = `Question ${currentQuestionIndex + 1} / ${questions.length}`;
 
-  // reset previous questions state   
+  // reset previous questions state
   hasAnswered = false;
   feedback.textContent = "";
   nextButton.disabled = true;
+  feedback.style.color = "";
 
   // progress bar update
   progressBar.style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
 
   options.innerHTML = "";
 
-  currentQuestion.options.forEach(option => {
+  currentQuestion.options.forEach((option) => {
     const button = document.createElement("button");
 
     button.className =
@@ -138,75 +132,79 @@ const showQuestion = () => {
 
     button.addEventListener("click", () => {
       checkAnswer(option, button);
-    })
+    });
 
     options.append(button);
-
   });
 
+  startTimer();
+};
 
+// options disable and correct answer highlisht
+function lockOptions() {
+  const correctAnswer = questions[currentQuestionIndex].correctAnswer;
 
+  options.querySelectorAll("button").forEach((button) => {
+    button.disabled = true;
+
+    button.classList.remove(
+      "border-[#D9DCE5]",
+      "bg-white",
+      "text-[#1B1E28]",
+      "hover:border-[#1F3FD1]",
+      "hover:bg-[#F3F5FF]",
+    );
+
+    if (button.textContent.trim() === correctAnswer) {
+      button.classList.add(
+        "border-[#12915A]",
+        "bg-[#E8F6EE]",
+        "text-[#0B5E3A]",
+      );
+    }
+  });
 }
-
 
 // answer checking code part
 
 function checkAnswer(selectedAnswer, selectedButton) {
-
   if (hasAnswered) {
     return;
   }
 
   hasAnswered = true;
 
+  // to stop the timer after option selection
+  clearInterval(timeInterval);
+  timeInterval = null;
+
   const correctAnswer = questions[currentQuestionIndex].correctAnswer;
 
   // Disable all buttons and remove hover effect
-  options.querySelectorAll("button").forEach(button => {
-
-    button.disabled = true;
-
-    // Remove default styling
-    button.classList.remove(
-      "border-[#D9DCE5]",
-      "bg-white",
-      "text-[#1B1E28]",
-      "hover:border-[#1F3FD1]",
-      "hover:bg-[#F3F5FF]"
-    );
-    // Highlight correct answer in green
-    if (button.textContent.trim() === correctAnswer) {
-      button.classList.add(
-        "border-[#12915A]",
-        "bg-[#E8F6EE]",
-        "text-[#0B5E3A]"
-      );
-    }
-
-  });
+  lockOptions();
 
   // Check selected answer
   if (selectedAnswer === correctAnswer) {
-
     score++;
     scoreDisplay.textContent = `Score: ${score}`;
     feedback.textContent = "Correct Answer!";
-
   } else {
     feedback.textContent = "Incorrect Answer!";
 
     // Highlight selected wrong answer in red
-    selectedButton.classList.add("border-[#D93A2B]", "bg-[#FDEDEB]", "text-[#8F2018]");
+    selectedButton.classList.add(
+      "border-[#D93A2B]",
+      "bg-[#FDEDEB]",
+      "text-[#8F2018]",
+    );
   }
 
   // Enable next question button
   nextButton.disabled = false;
-
 }
 
 // next question function
 function nextQuestion() {
-
   currentQuestionIndex++;
 
   if (currentQuestionIndex < questions.length) {
@@ -216,22 +214,60 @@ function nextQuestion() {
   }
 }
 
-
-// show result function 
+// show result function
 function showResult() {
+  clearInterval(timeInterval);
+  timeInterval = null;
+
   quizScreen.classList.add("hidden");
   resultScreen.classList.remove("hidden");
   finalScore.textContent = `${score} / ${questions.length}`;
-
 }
 
+// timer color updated code
 
+function updateTimerColor() {
+  const hue = Math.round((timeLeft / 15) * 120);
+
+  timerDisplay.style.color = `hsl(${hue}, 75%, 28%)`;
+  timerDisplay.style.backgroundColor = `hsl(${hue}, 75%, 92%)`;
+}
+
+// Timer start
+function startTimer() {
+
+  clearInterval(timeInterval);
+
+  timeLeft = 15;
+  timerDisplay.textContent = `Time: ${timeLeft}s`;
+  updateTimerColor();
+
+  timeInterval = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    updateTimerColor();
+
+    if (timeLeft <= 0) {
+      clearInterval(timeInterval);
+      timeInterval = null;
+
+      hasAnswered = true;
+
+      feedback.textContent = "Time's Up!";
+      feedback.style.color = "#DC2626";
+
+      lockOptions();
+
+      nextButton.disabled = false;
+
+    }
+  }, 1000);
+}
 
 // next btn event listener
-nextButton.addEventListener('click', nextQuestion);
+nextButton.addEventListener("click", nextQuestion);
 
 // restart button event listener
-restartButton.addEventListener('click', startQuiz);
+restartButton.addEventListener("click", startQuiz);
 
-startButton.addEventListener('click', startQuiz);
-
+startButton.addEventListener("click", startQuiz);
